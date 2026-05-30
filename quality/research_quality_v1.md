@@ -43,3 +43,29 @@
 - [ ] Peer review (if available)
 - [ ] Legal review (if accusations)
 - [ ] Confidence scale visible in output
+
+## Research Completeness
+- [ ] Power evolution assessed
+- [ ] Threat model applied
+- [ ] Moat analysis completed
+- [ ] Narrative vs reality gap documented
+- [ ] All group-specific forensic checks applied
+
+## Freshness Risk
+- CRITICAL: on-chain data > 48 hours old
+- HIGH: governance data > 14 days old
+- MEDIUM: TVL data > 7 days old
+- LOW: background/history data > 90 days old
+- Action: flag freshness risk explicitly in output
+
+## Unknown Tracking
+- [ ] All unknowns explicitly listed
+- [ ] Unknown wallets flagged for further investigation
+- [ ] Missing data sources documented
+- [ ] Confidence downgraded where data incomplete
+
+## Research Quality Statement
+Every published research must include:
+"This research was conducted using publicly available on-chain and off-chain data.
+Confidence ratings reflect data quality. Hypotheses are clearly marked.
+Unknown factors are explicitly acknowledged."
