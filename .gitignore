@@ -16,3 +16,6 @@ profiles/HYPE/PROFILE.yaml
 profiles/HYPE/PROFILE.rendered.md
 profiles/HYPE/TEST_RESULT.yaml
 profiles/HYPE/INTAKE.yaml
+profiles/*/*.rendered.md
+profiles/*/TEST_RESULT*.yaml
+v2/profiles/*.rendered.md

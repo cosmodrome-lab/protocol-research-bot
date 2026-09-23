@@ -41,6 +41,13 @@ python3 engine/pipeline.py run AAVE
 Packs live in `packs/{TICKER}/` (`pack.yaml`, `sources.yaml`, `extract.py`).
 The engine does not name a protocol.
 
+## Compatibility
+
+The legacy `engine/hype_pipeline.py` entry point was removed.
+Use `engine/pipeline.py` with the HYPE or AAVE pack.
+Profile YAML is canonical.
+Rendered Markdown and TEST_RESULT files are generated artifacts and are not tracked.
+
 ## Profiles in this repo
 
 - `profiles/HYPE/` — reference profile (`BOT-HYPE-001` r3)
