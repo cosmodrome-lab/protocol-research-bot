@@ -1,0 +1,31 @@
+schema_id: cosm.bot.profile.v2
+schema_version: "1.0.0"
+extends: cosm.bot.profile/1.0.0
+extension: cosm.bot.v2.extension/1.0.0
+status: FROZEN
+
+added_top:
+  - v2
+  - v2_laws_applied
+  - object_registry
+  - bytecode_audit
+  - incidents
+
+object:
+  required: [object_id, object_class, canonical_name, primary_locator, as_of]
+  optional: [protocol_relation, chain, contract_address]
+  object_class: [PROTOCOL, LABS, DAO, DEPLOYED_CONTRACT, VAULT, BRIDGE, LISTED_MARKET]
+  object_id_pattern: "OBJ-{PROTOCOL}-{NAME}"
+
+finding_added:
+  required_when_v2: [object_id]
+  optional: [related_object, event_id, who_could_do_it]
+
+bytecode_audit_record:
+  required: [object_id, result, as_of]
+  optional: [chain, contract_address, runtime_bytecode_sha256, captured_at, audit_id, audit_scope_id, explicit_linkage, same_as_of, limitations, source_ids]
+  result: [PROVEN, PARTIAL, NOT_PROVEN, NOT_APPLICABLE]
+
+incident_record:
+  required: [event_id, as_of, object_id, event_type, what_happened, who_could_do_it, authority_mechanism, source_ids, epistemology, evidence_status]
+  optional: [axis, locator, falsifier, limitations, result]

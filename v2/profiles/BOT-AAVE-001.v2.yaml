@@ -1,0 +1,501 @@
+profile_id: BOT-AAVE-001
+protocol: Aave
+ticker: AAVE
+profile_rev: r1-v2
+as_of: '2026-09-23'
+contract: cosm.bot.contract/1.0.0
+state: V2_PRODUCTION
+built_from: evidence/AAVE/observations.yaml
+forbidden_outputs:
+- BUY
+- SELL
+- HOLD
+- letter_grade
+- price_target
+layers:
+  smart_contracts:
+    findings:
+    - finding_id: AAVE-F-001
+      layer: smart_contracts
+      claim: Official v3 overview declares Aave v3 as a non-custodial liquidity protocol
+        on Ethereum and other networks, integrated via smart contracts.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/aave-v3/overview.md
+      source_ids:
+      - S-OVERVIEW
+      falsifier: Official overview retracts the non-custodial / multi-network claim.
+      limitations: ''
+      capture_sha256: ad1ca08d37b521253ce4222a7f205ddfece9c06a26a024301bafabdffe0c69f2
+      object_id: OBJ-AAVE-V3
+    - finding_id: AAVE-F-003
+      layer: smart_contracts
+      claim: Official developers docs publish a Pool smart-contract page (public contract
+        surface).
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://aave.com/docs/developers/smart-contracts/pool.md
+      source_ids:
+      - S-POOL
+      falsifier: Pool documentation page is absent at the captured URL.
+      limitations: Page existence ≠ bytecode audit.
+      capture_sha256: a379c7a4db4d8bf294fbdf8dceaa90764d98dae8b49995aae65630ac444eb6c7
+      artifact_hash: a379c7a4db4d8bf294fbdf8dceaa90764d98dae8b49995aae65630ac444eb6c7
+      object_id: OBJ-AAVE-POOL
+    - finding_id: AAVE-F-V2-002
+      layer: smart_contracts
+      object_id: OBJ-AAVE-POOL-IMPL
+      claim: Official bgd-labs address book names Ethereum V3 POOL proxy 0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2
+        and POOL_IMPL 0x97287a4F35E583D924f78AD88DB8AFcE1379189A. Runtime bytecode
+        of POOL_IMPL captured 2026-09-23 hashes to 9d8a157668b6964beac5531dcb7150dc639dc184dc2e1962cb9036801c71cf34.
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://raw.githubusercontent.com/bgd-labs/aave-address-book/main/src/AaveV3Ethereum.sol
+      artifact_hash: 9d8a157668b6964beac5531dcb7150dc639dc184dc2e1962cb9036801c71cf34
+      source_ids:
+      - S-AAVE-ADDRBOOK
+      - S-AAVE-POOL-IMPL-CODE
+      falsifier: Re-fetch of address book or eth_getCode at same as_of disagrees.
+      limitations: Bytecode hash is of captured runtime code. Not an audit linkage.
+  audits:
+    findings:
+    - finding_id: AAVE-F-010
+      layer: audits
+      claim: GitHub aave/aave-v3-core/audits listing at capture contained 8 PDF names
+        including OpenZeppelin, TrailOfBits, PeckShield, SigmaPrime, ABDK reports
+        as filenames.
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://api.github.com/repos/aave/aave-v3-core/contents/audits
+      source_ids:
+      - S-GH-AUDITS
+      falsifier: The captured GitHub listing JSON does not contain those filenames.
+      limitations: Filename listing is not the PDF body and not proof the running
+        deployment equals the audited commit.
+      capture_sha256: f3036f0d1af063b2a22dd5637ea4e26dae08c480136982abb1a2f59149faec60
+      artifact_hash: f3036f0d1af063b2a22dd5637ea4e26dae08c480136982abb1a2f59149faec60
+      object_id: OBJ-AAVE-V3
+    - finding_id: AAVE-F-011
+      layer: audits
+      claim: Official security page declares independent audits and that deployed
+        contracts are listed in docs / Address Book.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/security
+      source_ids:
+      - S-SECURITY
+      falsifier: Security page removes the independent-audit claim.
+      limitations: HTML marketing page; PDF bodies not captured here.
+      capture_sha256: 67576522665e3f16bca14d09ec74ec2021b6127771e179338dacca037455880e
+      object_id: OBJ-AAVE-V3
+    - finding_id: AAVE-F-V2-003
+      layer: audits
+      object_id: OBJ-AAVE-POOL-IMPL
+      claim: Historical OpenZeppelin Aave V3 audit (01-11-2021 filename in official
+        aave-v3-core/audits listing) states scope commit 14f6148e21b477d78347db6a1603039c9559e275.
+        No captured primary source states that 2026-09-23 POOL_IMPL bytecode equals
+        that commit.
+      epistemology: NOT_PROVEN
+      evidence_status: PRIMARY_LOCATED
+      locator: https://github.com/aave/aave-v3-core/blob/master/audits/01-11-2021_OpenZeppelin_AaveV3.pdf
+      source_ids:
+      - S-GH-AUDITS
+      - S-AAVE-POOL-IMPL-CODE
+      source_finding_ids:
+      - AAVE-F-V2-002
+      - AAVE-F-010
+      falsifier: Primary source binds current POOL_IMPL bytecode hash to that audit
+        commit.
+      limitations: 'PARTIAL production case: address and current bytecode proven;
+        historical audit identity proven; explicit linkage not proven.'
+  tokenomics:
+    findings:
+    - finding_id: AAVE-F-020
+      layer: tokenomics
+      claim: Official AAVE token page declares AAVE as the native governance token
+        of the protocol.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/aave.md
+      source_ids:
+      - S-TOKEN
+      falsifier: Official page retracts AAVE as governance token.
+      limitations: ''
+      capture_sha256: 54894a43cfe5e07956ca4192f1988f251fbc176fce44ac384c2c4f4789b3ab14
+      object_id: OBJ-AAVE-V3
+  revenue_to_token:
+    findings:
+    - finding_id: AAVE-F-030
+      layer: revenue_to_token
+      claim: Official GHO page declares GHO as a protocol-native over-collateralised
+        stablecoin. This capture does not by itself prove an un-switchable cashflow
+        from GHO to AAVE holders.
+      epistemology: NOT_PROVEN
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/gho.md
+      source_ids:
+      - S-GHO
+      falsifier: Official page states a mandatory AAVE-holder claim on GHO residual
+        cashflow.
+      limitations: GHO existence ≠ AAVE entitlement.
+      capture_sha256: b2c3999c76c01fb7660178d9997dfce281cfd257e7dbabb8b3f4d2511ced866a
+      object_id: OBJ-AAVE-GHO
+  validators_sequencers_nodes_oracles:
+    findings:
+    - finding_id: AAVE-F-040
+      layer: validators_sequencers_nodes_oracles
+      claim: Official docs declare each reserve is associated with an oracle contract
+        that supplies asset prices.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/oracle.md
+      source_ids:
+      - S-ORACLE
+      falsifier: Official docs remove per-reserve oracles.
+      limitations: ''
+      capture_sha256: 6229a0c3ce5dc12601c10e3f81a1bda0c9ecde584694d537efe25d171a1fa0e0
+      object_id: OBJ-AAVE-ORACLE
+  governance:
+    findings:
+    - finding_id: AAVE-F-050
+      layer: governance
+      claim: Official governance page declares the protocol is governed by AAVE, stkAAVE,
+        and aAAVE holders on Ethereum mainnet via Aave Governance v3.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      falsifier: Official page retracts token-holder governance.
+      limitations: ''
+      capture_sha256: 44500077bdbced8a53673616828400a0d97a7697268c5968c518e8796d2110b3
+      object_id: OBJ-AAVE-DAO
+    - finding_id: AAVE-F-051
+      layer: governance
+      claim: Official governance page declares a timelock delay of one day or seven
+        days before execution, depending on proposal type.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      falsifier: Official page removes timelocks.
+      limitations: ''
+      capture_sha256: 44500077bdbced8a53673616828400a0d97a7697268c5968c518e8796d2110b3
+      object_id: OBJ-AAVE-DAO
+    - finding_id: AAVE-F-052
+      layer: governance
+      claim: Official governance page declares off-chain Temp Check / ARFC votes on
+        Snapshot are non-binding.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      falsifier: Official page treats Snapshot as binding execution.
+      limitations: ''
+      capture_sha256: 44500077bdbced8a53673616828400a0d97a7697268c5968c518e8796d2110b3
+      object_id: OBJ-AAVE-DAO
+    - finding_id: AAVE-F-V2-001
+      layer: governance
+      object_id: OBJ-AAVE-DAO
+      claim: On 2026-08-12 AaveLabs published an official ARFC to rotate Aave Governance
+        Emergency Guardian signers, retaining 5-of-9 threshold and Safe addresses.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://governance.aave.com/t/arfc-aave-governance-emergency-guardian-signer-rotation/25469
+      source_ids:
+      - S-AAVE-GUARD-ARFC
+      falsifier: Primary forum JSON is not authored by AaveLabs or does not describe
+        guardian signer rotation.
+      limitations: Proposal captured; onchain execution not proven.
+      event_id: AAVE-EVT-001
+      who_could_do_it: Aave Governance Emergency Guardian 5-of-9; AAVE holders via
+        governance process
+  founders_management_entities:
+    findings:
+    - finding_id: AAVE-F-060
+      layer: founders_management_entities
+      claim: Official governance page attributes Governance v3 development to BGD
+        Labs and names Aave Labs as a governance interface operator.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      falsifier: Official page removes BGD Labs / Aave Labs attribution.
+      limitations: Role attribution is not a beneficial-owner graph.
+      capture_sha256: 44500077bdbced8a53673616828400a0d97a7697268c5968c518e8796d2110b3
+      object_id: OBJ-AAVE-LABS
+  jurisdiction_legal:
+    findings:
+    - finding_id: AAVE-F-070
+      layer: jurisdiction_legal
+      claim: Official licensing page declares protocol smart contracts as self-executing
+        and publicly auditable, with code across multiple GitHub repositories and
+        named licenses.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/resources/code-licensing.md
+      source_ids:
+      - S-LICENSE
+      falsifier: Official page retracts public auditability.
+      limitations: License text is not a corporate filing.
+      capture_sha256: d1e4392c55d5a2f4574d2490e07d14d8833a638368ed5eb262eaa8e2e5775386
+      object_id: OBJ-AAVE-LABS
+  treasury_custody_bridges_keys:
+    findings:
+    - finding_id: AAVE-F-080
+      layer: treasury_custody_bridges_keys
+      claim: Official Umbrella page declares an onchain bad-debt coverage system with
+        slashing of staked aTokens, parameters set by Aave DAO and ongoing management
+        delegated to the Aave Finance Committee.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/aave-v3/umbrella.md
+      source_ids:
+      - S-UMBRELLA
+      falsifier: Official page retracts Finance Committee delegation.
+      limitations: Committee membership and keys not in this capture.
+      capture_sha256: 20086943b02a752fefa1ab2cc77df8c8eff553e40bddd8aee45a65e3cb47c945
+      object_id: OBJ-AAVE-UMBRELLA
+  market_structure:
+    findings:
+    - finding_id: AAVE-F-090
+      layer: market_structure
+      claim: Official ecosystem includes GHO as a protocol-native stablecoin alongside
+        the v3 lending pools.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/gho.md
+      source_ids:
+      - S-GHO
+      falsifier: Official page removes GHO from the protocol surface.
+      limitations: ''
+      capture_sha256: b2c3999c76c01fb7660178d9997dfce281cfd257e7dbabb8b3f4d2511ced866a
+      object_id: OBJ-AAVE-GHO
+  disclosure_quality:
+    findings:
+    - finding_id: AAVE-F-002
+      layer: disclosure_quality
+      claim: Official overview uses the phrase battle-tested smart contracts. That
+        is marketing language on a docs page, not an audit scope table.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/aave-v3/overview.md
+      source_ids:
+      - S-OVERVIEW
+      falsifier: Overview replaces the phrase with an audit-hash table.
+      limitations: ''
+      capture_sha256: ad1ca08d37b521253ce4222a7f205ddfece9c06a26a024301bafabdffe0c69f2
+      object_id: OBJ-AAVE-V3
+    - finding_id: AAVE-F-100
+      layer: disclosure_quality
+      claim: Official docs publish llms.txt and markdown mirrors used in this capture.
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://aave.com/docs/llms.txt
+      source_ids:
+      - S-LLMS
+      falsifier: llms.txt is gone at the captured URL.
+      limitations: ''
+      capture_sha256: 0011b017159874af4ae081bb52e9112a9f9bc3fe5ff01415ef4a65b06779bedd
+      artifact_hash: 0011b017159874af4ae081bb52e9112a9f9bc3fe5ff01415ef4a65b06779bedd
+      object_id: OBJ-AAVE-V3
+  architectural_dependencies:
+    findings:
+    - finding_id: AAVE-F-110
+      layer: architectural_dependencies
+      claim: 'Declared critical path in captured docs: Ethereum-settled token voting,
+        Governance v3 payloads, v3 Pool contracts, per-reserve oracles.'
+      epistemology: DERIVED
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      - S-OVERVIEW
+      falsifier: Official docs describe a path that does not use token voting or Pool
+        contracts.
+      limitations: ''
+      capture_sha256: 44500077bdbced8a53673616828400a0d97a7697268c5968c518e8796d2110b3
+      source_finding_ids:
+      - AAVE-F-050
+      - AAVE-F-001
+      object_id: OBJ-AAVE-V3
+  declared_vs_observed:
+    findings:
+    - finding_id: AAVE-F-120
+      layer: declared_vs_observed
+      claim: Docs declare token-holder control and public contracts. This run observed
+        those sentences and a GitHub audits directory listing. It did not observe
+        guardian keys or that running bytecode equals an audited commit.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      - S-GH-AUDITS
+      falsifier: Capture of running bytecode hash matching an audit commit.
+      limitations: ''
+      capture_sha256: 44500077bdbced8a53673616828400a0d97a7697268c5968c518e8796d2110b3
+      source_finding_ids:
+      - AAVE-F-050
+      - AAVE-F-010
+      - AAVE-F-100
+      object_id: OBJ-AAVE-V3
+  weaknesses:
+    findings:
+    - finding_id: AAVE-F-130
+      layer: weaknesses
+      claim: Official docs declare token-holder governance and upgradeable core contracts.
+        This run did not capture guardian-key holders or a date-aligned treasury snapshot.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_LOCATED
+      locator: https://aave.com/docs/ecosystem/governance.md
+      source_ids:
+      - S-GOV
+      - S-OVERVIEW
+      source_finding_ids:
+      - AAVE-F-050
+      - AAVE-F-001
+      falsifier: Capture of signer registry and treasury snapshot with hashes.
+      limitations: Derived only from findings in this profile.
+      object_id: OBJ-AAVE-V3
+  strengths:
+    findings:
+    - finding_id: AAVE-F-140
+      layer: strengths
+      claim: Official docs index, markdown mirrors, public GitHub audit directory
+        reference, and on-chain voting architecture are published and were retrieved.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://aave.com/docs/llms.txt
+      artifact_hash: 0011b017159874af4ae081bb52e9112a9f9bc3fe5ff01415ef4a65b06779bedd
+      source_ids:
+      - S-LLMS
+      - S-GOV
+      source_finding_ids:
+      - AAVE-F-100
+      - AAVE-F-010
+      - AAVE-F-050
+      falsifier: llms.txt or governance page cannot be reproduced from saved bodies.
+      limitations: Derived only from findings in this profile.
+      object_id: OBJ-AAVE-V3
+unknowns:
+- unknown_id: AAVE-U-001
+  layer: audits
+  question: Which running deployment commit equals which audit PDF?
+  why_material: A folder of PDF names is not a bytecode match.
+  what_would_close_it: Commit hash ↔ deployed bytecode ↔ PDF scope.
+  object_id: OBJ-AAVE-V3
+- unknown_id: AAVE-U-002
+  layer: revenue_to_token
+  question: Is there an un-switchable route from protocol revenue / GHO residual to
+    AAVE holders?
+  why_material: Governance token ≠ cashflow claim.
+  what_would_close_it: Rule without admin off-switch plus flow.
+  object_id: OBJ-AAVE-GHO
+- unknown_id: AAVE-U-003
+  layer: treasury_custody_bridges_keys
+  question: Collector / treasury / guardian / Finance Committee signer sets?
+  why_material: Umbrella names a committee; keys are missing.
+  what_would_close_it: Address registry + threshold.
+  object_id: OBJ-AAVE-UMBRELLA
+- unknown_id: AAVE-U-004
+  layer: tokenomics
+  question: Circulating, locked, stkAAVE share, treasury inventory on as_of?
+  why_material: Token role is not free float.
+  what_would_close_it: Date-aligned snapshot.
+  object_id: OBJ-AAVE-V3
+- unknown_id: AAVE-U-005
+  layer: jurisdiction_legal
+  question: Legal entities behind Aave Labs / BGD Labs / DAO and licences?
+  why_material: Docs name Labs; they are not filings.
+  what_would_close_it: Primary filings.
+  object_id: OBJ-AAVE-LABS
+- unknown_id: AAVE-U-006
+  layer: founders_management_entities
+  question: Beneficial control of Aave Labs and BGD Labs?
+  why_material: Interface operator ≠ owner graph.
+  what_would_close_it: official_cross_link or independent confirmation.
+  object_id: OBJ-AAVE-LABS
+- unknown_id: AAVE-U-007
+  layer: validators_sequencers_nodes_oracles
+  question: Oracle operator set and fallback per reserve on as_of?
+  why_material: Docs say an oracle exists; not who can change the source.
+  what_would_close_it: Source registry + admin.
+  object_id: OBJ-AAVE-ORACLE
+v2_candidates:
+- live governance proposal graph
+- treasury / collector signer set
+- GHO minter path as revenue-to-token
+- V4 vs V3 running-system identity
+v2: true
+v2_laws_applied:
+- IDENTITY_GATE
+- BYTECODE_AUDIT_LINKAGE
+- INCIDENT_FINDING_INDEX
+object_registry: v2/objects/AAVE.yaml
+bytecode_audit:
+- object_id: OBJ-AAVE-POOL-IMPL
+  chain: ethereum
+  contract_address: '0x97287a4F35E583D924f78AD88DB8AFcE1379189A'
+  runtime_bytecode_sha256: 9d8a157668b6964beac5531dcb7150dc639dc184dc2e1962cb9036801c71cf34
+  captured_at: '2026-09-23T05:18:00Z'
+  as_of: '2026-09-23'
+  audit_id: OZ-AAVE-V3-2021-11-01
+  audit_scope_id: aave-v3-core@14f6148e21b477d78347db6a1603039c9559e275
+  audit_locator: https://github.com/aave/aave-v3-core/blob/master/audits/01-11-2021_OpenZeppelin_AaveV3.pdf
+  explicit_linkage: 'NO'
+  same_as_of: YES_CAPTURE_DATE_ALIGNED_DEPLOY_NOT_PROVEN_EQUAL_TO_AUDIT_COMMIT
+  result: PARTIAL
+  limitations: Official address book identifies Pool proxy 0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2
+    and POOL_IMPL 0x97287a4F35E583D924f78AD88DB8AFcE1379189A. Runtime bytecode of
+    both was captured 2026-09-23. OpenZeppelin V3 audit (filename on official audits
+    directory) states scope commit 14f6148e21b477d78347db6a1603039c9559e275 of aave-v3-core.
+    No captured primary source states that current POOL_IMPL bytecode equals that
+    audit commit. Address identity PROVEN; current bytecode hash PROVEN; historical
+    audit identity PROVEN; explicit same-as_of deployment↔audit linkage NOT_PROVEN.
+  source_ids:
+  - S-AAVE-ADDRBOOK
+  - S-AAVE-POOL-IMPL-CODE
+  - S-GH-AUDITS
+- object_id: OBJ-AAVE-POOL
+  chain: ethereum
+  contract_address: '0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2'
+  runtime_bytecode_sha256: bf8a408a1f5440c167d91fa2d972deb23bb4d809e8dd089009885ec88a826f88
+  captured_at: '2026-09-23T05:18:00Z'
+  as_of: '2026-09-23'
+  audit_id: OZ-AAVE-V3-2021-11-01
+  audit_scope_id: aave-v3-core@14f6148e21b477d78347db6a1603039c9559e275
+  explicit_linkage: 'NO'
+  result: NOT_PROVEN
+  limitations: Address is an InitializableImmutableAdminUpgradeabilityProxy. Proxy
+    runtime bytecode is not the audited Pool logic. Linkage must be assessed on the
+    implementation.
+  source_ids:
+  - S-AAVE-ADDRBOOK
+  - S-AAVE-POOL-PROXY-CODE
+incidents:
+- event_id: AAVE-EVT-001
+  as_of: '2026-08-12'
+  object_id: OBJ-AAVE-DAO
+  axis: governance
+  event_type: emergency_governance_action
+  what_happened: Official Aave Governance forum ARFC posted by AaveLabs on 2026-08-12
+    proposes updating the signer composition of the Aave Governance Emergency Guardian
+    while retaining the existing 5-of-9 threshold, permissions, and Safe addresses.
+  who_could_do_it: Aave Governance Emergency Guardian (5-of-9 Safe); token-holder
+    governance to ratify signer rotation
+  authority_mechanism: Governance Emergency Guardian Safe; ARFC then onchain governance
+    process as declared on official governance docs
+  source_ids:
+  - S-AAVE-GUARD-ARFC
+  - S-GOV
+  epistemology: DECLARED_ONLY
+  evidence_status: PRIMARY_LOCATED
+  locator: https://governance.aave.com/t/arfc-aave-governance-emergency-guardian-signer-rotation/25469
+  falsifier: Primary source retracts the ARFC or shows it is not an AaveLabs/DAO communication.
+  limitations: Captured official forum JSON authored by AaveLabs. Onchain execution
+    of the signer rotation is not proven in this run.
+  result: PASS

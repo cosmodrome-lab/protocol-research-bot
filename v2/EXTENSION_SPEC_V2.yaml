@@ -1,0 +1,53 @@
+schema_id: cosm.bot.v2.extension
+version: "1.0.0"
+status: FROZEN
+recorded_at: "2026-09-23T12:26+07:00"
+extends: cosm.bot.contract/1.0.0
+not_a_v1_change: true
+public_push: NO
+
+laws:
+  - IDENTITY_GATE
+  - BYTECODE_AUDIT_LINKAGE
+  - INCIDENT_FINDING_INDEX
+
+object_class:
+  - PROTOCOL
+  - LABS
+  - DAO
+  - DEPLOYED_CONTRACT
+  - VAULT
+  - BRIDGE
+  - LISTED_MARKET
+
+slice_rule:
+  unit: as_of
+  not: interval_observation
+
+IDENTITY_GATE:
+  when: before intake and on every finding
+  object_required: [object_id, object_class, canonical_name, primary_locator, as_of]
+  finding_required: object_id
+  rule: >
+    Findings cite only a registered object_id or an explicit
+    related_object with a typed link.
+    Labs speech mixed with protocol deployment without linkage
+    is invalid.
+
+BYTECODE_AUDIT_LINKAGE:
+  proven_requires:
+    - runtime_bytecode_sha256
+    - audit_scope_id
+    - explicit_linkage: YES
+    - same_as_of
+  without_explicit_linkage: [DECLARED_ONLY, NOT_PROVEN, PARTIAL]
+  forbidden: audited_protocol_by_name_proximity
+
+INCIDENT_FINDING_INDEX:
+  required: [event_id, as_of, object_id, event_type, what_happened, who_could_do_it, authority_mechanism, source_ids, epistemology, evidence_status]
+  not: monitor
+  not: time_window_collector
+  missing_event: NOT_PROVEN_allowed
+
+v1_profile:
+  v2_flag_absent: V2_LAWS_NOT_APPLIED

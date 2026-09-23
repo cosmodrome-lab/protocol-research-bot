@@ -18,6 +18,19 @@ validate + render
 
 Law: `CONTRACT_V1.yaml` (`cosm.bot.contract/1.0.0`, frozen).
 
+## V2
+
+V1 remains frozen as `cosm.bot.contract/1.0.0`.
+V2 is an opt-in extension: `cosm.bot.v2.extension/1.0.0`.
+
+V2 adds:
+
+- Identity Gate
+- Bytecode ↔ Audit Linkage
+- Incident Finding Index
+
+See [`v2/README.md`](v2/README.md).
+
 ## Run
 
 ```

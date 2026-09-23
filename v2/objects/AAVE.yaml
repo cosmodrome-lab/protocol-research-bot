@@ -1,0 +1,64 @@
+as_of: '2026-09-23'
+objects:
+- object_id: OBJ-AAVE-V3
+  object_class: PROTOCOL
+  canonical_name: Aave v3
+  protocol_relation: self
+  primary_locator: https://aave.com/docs/aave-v3/overview.md
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-LABS
+  object_class: LABS
+  canonical_name: Aave Labs
+  protocol_relation: interface_and_contributor
+  primary_locator: https://aave.com/docs/ecosystem/governance.md
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-DAO
+  object_class: DAO
+  canonical_name: Aave DAO / Governance v3
+  protocol_relation: token_holder_governance
+  primary_locator: https://aave.com/docs/ecosystem/governance.md
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-GHO
+  object_class: DEPLOYED_CONTRACT
+  canonical_name: GHO stablecoin
+  protocol_relation: protocol_native_stablecoin
+  primary_locator: https://aave.com/docs/ecosystem/gho.md
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-UMBRELLA
+  object_class: VAULT
+  canonical_name: Aave Umbrella
+  protocol_relation: bad_debt_coverage
+  primary_locator: https://aave.com/docs/aave-v3/umbrella.md
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-POOL
+  object_class: DEPLOYED_CONTRACT
+  canonical_name: Aave V3 Pool proxy (Ethereum)
+  protocol_relation: core_pool_proxy
+  primary_locator: https://raw.githubusercontent.com/bgd-labs/aave-address-book/main/src/AaveV3Ethereum.sol
+  chain: ethereum
+  contract_address: '0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2'
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-POOL-IMPL
+  object_class: DEPLOYED_CONTRACT
+  canonical_name: Aave V3 Pool implementation (Ethereum)
+  protocol_relation: core_pool_impl
+  primary_locator: https://raw.githubusercontent.com/bgd-labs/aave-address-book/main/src/AaveV3Ethereum.sol
+  chain: ethereum
+  contract_address: '0x97287a4F35E583D924f78AD88DB8AFcE1379189A'
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-ORACLE
+  object_class: DEPLOYED_CONTRACT
+  canonical_name: Aave V3 Oracle (Ethereum)
+  protocol_relation: price_oracle
+  primary_locator: https://raw.githubusercontent.com/bgd-labs/aave-address-book/main/src/AaveV3Ethereum.sol
+  chain: ethereum
+  contract_address: '0x54586bE62E3c3580375aE3723C145253060Ca0C2'
+  as_of: '2026-09-23'
+- object_id: OBJ-AAVE-PROVIDER
+  object_class: DEPLOYED_CONTRACT
+  canonical_name: Aave V3 Pool Addresses Provider (Ethereum)
+  protocol_relation: addresses_provider
+  primary_locator: https://raw.githubusercontent.com/bgd-labs/aave-address-book/main/src/AaveV3Ethereum.sol
+  chain: ethereum
+  contract_address: '0x2f39d218133AFaB8F2B819B1066c7E434Ad94E9e'
+  as_of: '2026-09-23'
