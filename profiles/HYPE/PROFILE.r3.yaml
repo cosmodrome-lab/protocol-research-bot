@@ -1,0 +1,342 @@
+profile_id: BOT-HYPE-001
+protocol: Hyperliquid
+ticker: HYPE
+profile_rev: r3
+as_of: '2026-09-23'
+contract: cosm.bot.contract/1.0.0
+state: PIPELINE_BUILT
+built_from: evidence/HYPE/observations.yaml
+forbidden_outputs:
+- BUY
+- SELL
+- HOLD
+- letter_grade
+- price_target
+layers:
+  smart_contracts:
+    findings:
+    - finding_id: HYPE-F-001
+      layer: smart_contracts
+      claim: Official docs declare L1 execution split into HyperCore and HyperEVM.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid.md
+      source_ids:
+      - S-ABOUT
+      falsifier: Official docs retract the HyperCore/HyperEVM split.
+      limitations: Declaration in captured markdown, not a code audit.
+      capture_sha256: 8a8b73dac2d3939aa1f4e126c4b36bd3efde2a5d28d97dfe72a2ddca6297a01f
+    - finding_id: HYPE-F-002
+      layer: smart_contracts
+      claim: Official docs declare HyperCore holds onchain perpetual and spot order
+        books.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid.md
+      source_ids:
+      - S-ABOUT
+      falsifier: Official docs describe off-chain books as the live model.
+      limitations: ''
+      capture_sha256: 8a8b73dac2d3939aa1f4e126c4b36bd3efde2a5d28d97dfe72a2ddca6297a01f
+  audits:
+    findings:
+    - finding_id: HYPE-F-010
+      layer: audits
+      claim: Official audits page declares a Zellic audit of the legacy bridge contract,
+        not of HyperCore matching/liquidation.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/audits.md
+      source_ids:
+      - S-AUDITS
+      falsifier: Official audits page lists a HyperCore matching-engine audit with
+        commit/bytecode hash.
+      limitations: Embedded Zellic PDF bytes were not captured.
+      capture_sha256: cd9b2ff3062f193c2e50267f0d38ae99462d7780b0dda62993dae29e3047b949
+    - finding_id: HYPE-F-012
+      layer: audits
+      claim: This capture does not contain an official statement that running HyperCore
+        execution is in any published audit scope.
+      epistemology: NOT_PROVEN
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/audits.md
+      source_ids:
+      - S-AUDITS
+      falsifier: Audits page names HyperCore matching/liquidation bytecode and audit
+        hash.
+      limitations: Absence of a sentence is not proof that no other audit exists off
+        this page.
+      capture_sha256: cd9b2ff3062f193c2e50267f0d38ae99462d7780b0dda62993dae29e3047b949
+  tokenomics:
+    findings:
+    - finding_id: HYPE-F-020
+      layer: tokenomics
+      claim: Official staking page declares a 10k HYPE self-delegation requirement
+        for an active validator.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking.md
+      source_ids:
+      - S-STAKING
+      falsifier: Official docs drop the 10k HYPE threshold.
+      limitations: ''
+      capture_sha256: d773e914f7bdd609845356dca3b2cb63e3be7cc81ffa09cae569068fe23b1bef
+  revenue_to_token:
+    findings: []
+  validators_sequencers_nodes_oracles:
+    findings:
+    - finding_id: HYPE-F-040
+      layer: validators_sequencers_nodes_oracles
+      claim: Official oracle page declares validators publish spot oracle prices;
+        final oracle is stake-weighted median of submissions.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/oracle.md
+      source_ids:
+      - S-ORACLE
+      falsifier: Official docs describe an external-only oracle with no validator
+        submission.
+      limitations: ''
+      capture_sha256: b0f2d00c7432ddb2545e6ccb89de59c629db395964ab9389e8581789b32828d1
+    - finding_id: HYPE-F-041
+      layer: validators_sequencers_nodes_oracles
+      claim: Official info API validatorSummaries at capture listed 35 validators,
+        27 active.
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://api.hyperliquid.xyz/info
+      source_ids:
+      - S-API-VAL
+      falsifier: A later capture of the same endpoint lists a different count at the
+        same timestamp.
+      limitations: Observation of the captured API body only.
+      capture_sha256: 0078288fbf9540b6339b537c48d256babc3887c5f2ba93afc1f9272e22e6c568
+      artifact_hash: 0078288fbf9540b6339b537c48d256babc3887c5f2ba93afc1f9272e22e6c568
+    - finding_id: HYPE-F-042
+      layer: validators_sequencers_nodes_oracles
+      claim: In the captured active set, stake shares were top1=0.1257, top3=0.3668.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://api.hyperliquid.xyz/info
+      source_ids:
+      - S-API-VAL
+      falsifier: Recompute from the same captured JSON yields different shares.
+      limitations: ''
+      capture_sha256: 0078288fbf9540b6339b537c48d256babc3887c5f2ba93afc1f9272e22e6c568
+      artifact_hash: 0078288fbf9540b6339b537c48d256babc3887c5f2ba93afc1f9272e22e6c568
+      source_finding_ids:
+      - HYPE-F-041
+  governance:
+    findings:
+    - finding_id: HYPE-F-021
+      layer: governance
+      claim: Official staking page declares a quorum as any validator set with more
+        than two-thirds of total stake.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking.md
+      source_ids:
+      - S-STAKING
+      falsifier: Official docs define quorum differently.
+      limitations: ''
+      capture_sha256: d773e914f7bdd609845356dca3b2cb63e3be7cc81ffa09cae569068fe23b1bef
+    - finding_id: HYPE-F-022
+      layer: governance
+      claim: Official staking page declares validators may jail peers; jailing is
+        not slashing.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking.md
+      source_ids:
+      - S-STAKING
+      falsifier: Official docs retract peer-jail.
+      limitations: ''
+      capture_sha256: d773e914f7bdd609845356dca3b2cb63e3be7cc81ffa09cae569068fe23b1bef
+  founders_management_entities:
+    findings:
+    - finding_id: HYPE-F-060
+      layer: founders_management_entities
+      claim: Official contributors page declares Hyperliquid Labs as a core contributor,
+        led by Jeff and iliensinc.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid/core-contributors.md
+      source_ids:
+      - S-CONTRIB
+      falsifier: Official page retracts Labs attribution.
+      limitations: Self-declaration. Not independent legal identity confirmation.
+      capture_sha256: 38c76989b4f517be40b473751202331e7b84b58d669b71e3d91cdd15cbbe29e0
+  jurisdiction_legal:
+    findings: []
+  treasury_custody_bridges_keys:
+    findings:
+    - finding_id: HYPE-F-080
+      layer: treasury_custody_bridges_keys
+      claim: Official protocol-vaults page declares HLP as a protocol vault that market-makes,
+        liquidates, and accrues a portion of trading fees.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults.md
+      source_ids:
+      - S-VAULTS
+      falsifier: Official page retracts HLP fee accrual.
+      limitations: Signer set not in this capture.
+      capture_sha256: 253368da607ce79327057362c9bafbf6b0736c2b3801439956dc58cd62ad86cf
+  market_structure:
+    findings:
+    - finding_id: HYPE-F-004
+      layer: market_structure
+      claim: Official order-book page declares CEX-like books with price-time priority.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/order-book.md
+      source_ids:
+      - S-BOOK
+      falsifier: Official docs describe AMM-only matching.
+      limitations: ''
+      capture_sha256: 765867c32b2c9014dd7974e137ec22b8e8df6769f709358e716ae9b9440f9b27
+    - finding_id: HYPE-F-090
+      layer: market_structure
+      claim: Official info API meta.universe at capture listed 234 perp assets.
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://api.hyperliquid.xyz/info
+      source_ids:
+      - S-API-META
+      falsifier: Re-parse of the captured JSON yields a different universe length.
+      limitations: ''
+      capture_sha256: aa725f96351e898c95ab7cbc4062208200ea4fa7346478a10f60748e928b82e5
+      artifact_hash: aa725f96351e898c95ab7cbc4062208200ea4fa7346478a10f60748e928b82e5
+  disclosure_quality:
+    findings:
+    - finding_id: HYPE-F-100
+      layer: disclosure_quality
+      claim: Official docs publish a machine-readable index (llms.txt) and markdown
+        mirrors.
+      epistemology: OBSERVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/llms.txt
+      source_ids:
+      - S-LLMS
+      falsifier: llms.txt is gone at the captured URL.
+      limitations: ''
+      capture_sha256: 1c712a65803e2be8cda816d62167cfd41770cd6f1ab4e1c7ded8e79f1faa3071
+      artifact_hash: 1c712a65803e2be8cda816d62167cfd41770cd6f1ab4e1c7ded8e79f1faa3071
+  architectural_dependencies:
+    findings:
+    - finding_id: HYPE-F-003
+      layer: architectural_dependencies
+      claim: Official docs declare consensus as HyperBFT.
+      epistemology: DECLARED_ONLY
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid.md
+      source_ids:
+      - S-ABOUT
+      falsifier: Official docs name a different consensus.
+      limitations: ''
+      capture_sha256: 8a8b73dac2d3939aa1f4e126c4b36bd3efde2a5d28d97dfe72a2ddca6297a01f
+  declared_vs_observed:
+    findings:
+    - finding_id: HYPE-F-120
+      layer: declared_vs_observed
+      claim: Docs declare onchain books. This run observed those sentences and the
+        API validator set. It did not observe HyperCore source or a matching-engine
+        audit.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid.md
+      source_ids:
+      - S-ABOUT
+      - S-AUDITS
+      falsifier: A captured official source publishes HyperCore matching source plus
+        audit hash.
+      limitations: ''
+      capture_sha256: 8a8b73dac2d3939aa1f4e126c4b36bd3efde2a5d28d97dfe72a2ddca6297a01f
+      source_finding_ids:
+      - HYPE-F-002
+      - HYPE-F-012
+      - HYPE-F-100
+  weaknesses:
+    findings:
+    - finding_id: HYPE-F-130
+      layer: weaknesses
+      claim: Captured official surface documents a Zellic legacy-bridge audit and
+        does not document HyperCore matching audit or a holder revenue entitlement.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_LOCATED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/audits.md
+      source_ids:
+      - S-AUDITS
+      - S-FEES
+      source_finding_ids:
+      - HYPE-F-012
+      - HYPE-F-010
+      falsifier: Official capture adds HyperCore audit hash and an un-switchable holder
+        route.
+      limitations: Derived only from findings in this profile.
+  strengths:
+    findings:
+    - finding_id: HYPE-F-140
+      layer: strengths
+      claim: Official docs index, markdown mirrors, and a live validatorSummaries
+        API existed at capture and were hashed as retrieved bodies.
+      epistemology: DERIVED
+      evidence_status: PRIMARY_CAPTURED
+      locator: https://hyperliquid.gitbook.io/hyperliquid-docs/llms.txt
+      artifact_hash: 1c712a65803e2be8cda816d62167cfd41770cd6f1ab4e1c7ded8e79f1faa3071
+      source_ids:
+      - S-LLMS
+      - S-API-VAL
+      source_finding_ids:
+      - HYPE-F-100
+      - HYPE-F-041
+      - HYPE-F-001
+      falsifier: Captured official index or API body cannot be reproduced from saved
+        files.
+      limitations: Derived only from findings in this profile.
+unknowns:
+- unknown_id: HYPE-U-001
+  layer: audits
+  question: Does any published audit cover running HyperCore matching bytecode?
+  why_material: Bridge audit is not core-execution audit.
+  what_would_close_it: Audit PDF + bytecode hash.
+- unknown_id: HYPE-U-002
+  layer: revenue_to_token
+  question: Is there an un-switchable route from protocol revenue to HYPE holders?
+  why_material: Fee schedule ≠ holder entitlement.
+  what_would_close_it: Rule/code without admin off-switch.
+- unknown_id: HYPE-U-003
+  layer: treasury_custody_bridges_keys
+  question: HLP / treasury / bridge signer sets?
+  why_material: HLP role is declared; keys are not.
+  what_would_close_it: Address registry + threshold.
+- unknown_id: HYPE-U-004
+  layer: validators_sequencers_nodes_oracles
+  question: Which validators are Foundation-affiliated?
+  why_material: API gives names and stake, not control graph.
+  what_would_close_it: Identity map.
+- unknown_id: HYPE-U-005
+  layer: tokenomics
+  question: Free float / unlocks / insider inventory on as_of?
+  why_material: Staking threshold is not circulating supply.
+  what_would_close_it: Date-aligned snapshot.
+- unknown_id: HYPE-U-006
+  layer: jurisdiction_legal
+  question: Full legal map of Labs / Foundation / HPC?
+  why_material: Contributors page names Labs, not a registry.
+  what_would_close_it: Primary filings.
+- unknown_id: HYPE-U-007
+  layer: smart_contracts
+  question: Is HyperCore matching source public and reproducible?
+  why_material: Docs describe behaviour; they are not the binary.
+  what_would_close_it: Public tree + build hash.
+- unknown_id: HYPE-U-008
+  layer: governance
+  question: Can HYPE holders change HyperCore parameters without the validator path?
+  why_material: Quorum and jail are validator-set mechanics.
+  what_would_close_it: Observed proposal → executed change without that path.
+v2_candidates:
+- Assistance Fund / buyback flow measurement
+- Validator affiliation graph
+- Freshness SLA
+- HIP-3 ticker identity

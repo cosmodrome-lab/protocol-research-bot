@@ -1,0 +1,13 @@
+sources:
+  - {source_id: S-LLMS, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/llms.txt", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-ABOUT, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-OVERVIEW, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/overview.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-STAKING, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-ORACLE, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/oracle.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-BOOK, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/order-book.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-AUDITS, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/audits.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-CONTRIB, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid/core-contributors.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-VAULTS, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-FEES, url: "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees.md", source_type: PRIMARY_OFFICIAL, publisher: Hyperliquid Docs, method: GET}
+  - {source_id: S-API-VAL, url: "https://api.hyperliquid.xyz/info", source_type: PRIMARY_ONCHAIN_API, publisher: Hyperliquid API, method: POST, body: {type: validatorSummaries}}
+  - {source_id: S-API-META, url: "https://api.hyperliquid.xyz/info", source_type: PRIMARY_ONCHAIN_API, publisher: Hyperliquid API, method: POST, body: {type: meta}}

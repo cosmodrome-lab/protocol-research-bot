@@ -1,0 +1,46 @@
+schema_id: cosm.bot.inheritance
+schema_version: "0.1.0"
+
+rule: "Inherit discipline and questions. Do not inherit stores. Do not mount method-A."
+
+from_forensic_node:
+  take:
+    - two_axes
+    - url_is_locator
+    - unknown_first_class
+    - declared_vs_observed
+    - actor_identity_rule
+    - no_writeback_into_source
+    - product_admission_outside
+  do_not_take:
+    - db_l0/events
+    - db_l1/signals
+    - objects/sha256
+    - chains heads as bot authority
+    - session machine tickets
+
+from_github_historical_1ade39d:
+  take:
+    - methodology/FIF-v3.2.md questions
+    - methodology/ECI-v1.0.md barriers
+    - methodology/GitHub-Forensic-Layer-v2.0.md metrics names
+    - EVIDENCE-STANDARDS.md custody
+    - INSTITUTIONAL-PITCH.md three questions
+  do_not_take:
+    - public letter grade as product
+    - deleted Lido case as live bot fixture
+    - weekly sealer as V1 runtime
+
+from_name_map_drafts_mentioned_not_mounted:
+  status: BODIES_NOT_ON_THIS_NODE
+  ids:
+    - Forensic Signal Standard V1 DRAFT
+    - Analysis Plane R0
+    - H-001 Layer Separation V1 DRAFT
+    - Collector Registry
+  action: "Do not redesign blindly. Park as V2 candidates."
+
+from_medium_series_2026:
+  status: PUBLIC_SPEECH_OF_COSMODROME
+  use_as: candidate_claims_to_restate_with_status
+  not_as: OBSERVED_by_this_bot_runtime

@@ -1,0 +1,27 @@
+protocol: Hyperliquid
+ticker: HYPE
+profile_id: BOT-HYPE-001
+profile_rev: r3
+as_of: "2026-09-23"
+v2_candidates:
+  - Assistance Fund / buyback flow measurement
+  - Validator affiliation graph
+  - Freshness SLA
+  - HIP-3 ticker identity
+summaries:
+  weaknesses:
+    finding_id: HYPE-F-130
+    claim: "Captured official surface documents a Zellic legacy-bridge audit and does not document HyperCore matching audit or a holder revenue entitlement."
+    source_finding_ids: [HYPE-F-012, HYPE-F-030, HYPE-F-010]
+    source_ids: [S-AUDITS, S-FEES]
+    locator_source: S-AUDITS
+    evidence_status: PRIMARY_LOCATED
+    falsifier: "Official capture adds HyperCore audit hash and an un-switchable holder route."
+  strengths:
+    finding_id: HYPE-F-140
+    claim: "Official docs index, markdown mirrors, and a live validatorSummaries API existed at capture and were hashed as retrieved bodies."
+    source_finding_ids: [HYPE-F-100, HYPE-F-041, HYPE-F-001]
+    source_ids: [S-LLMS, S-API-VAL]
+    locator_source: S-LLMS
+    evidence_status: PRIMARY_CAPTURED
+    falsifier: "Captured official index or API body cannot be reproduced from saved files."

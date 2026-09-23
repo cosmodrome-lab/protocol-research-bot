@@ -1,0 +1,59 @@
+schema_id: cosm.bot.profile
+schema_version: "1.0.0"
+object: protocol_forensic_profile
+contract: cosm.bot.contract/1.0.0
+status: FROZEN_V1
+
+id_pattern: "BOT-{PROTOCOL_SHORT}-{SEQ:03d}"
+rev_pattern: "r{N}"
+
+required_top:
+  - profile_id
+  - protocol
+  - ticker
+  - profile_rev
+  - as_of
+  - contract
+  - layers
+  - unknowns
+  - forbidden_outputs
+
+analysis_layers:
+  - smart_contracts
+  - audits
+  - tokenomics
+  - revenue_to_token
+  - validators_sequencers_nodes_oracles
+  - governance
+  - founders_management_entities
+  - jurisdiction_legal
+  - treasury_custody_bridges_keys
+  - market_structure
+  - disclosure_quality
+  - architectural_dependencies
+  - declared_vs_observed
+
+summary_layers:
+  - weaknesses
+  - strengths
+
+finding:
+  required: [finding_id, layer, claim, epistemology, evidence_status, locator, falsifier]
+  epistemology: [OBSERVED, DERIVED, ESTIMATED, HYPOTHESIS, DECLARED_ONLY, NOT_PROVEN]
+  evidence_status: [PRIMARY_CAPTURED, PRIMARY_LOCATED, SECONDARY, RECONSTRUCTED, ABSENT]
+  extra_for_summary: [source_finding_ids]
+
+unknown_slot:
+  required: [unknown_id, layer, question, why_material, what_would_close_it]
+
+compatibility:
+  OBSERVED: [PRIMARY_CAPTURED, PRIMARY_LOCATED]
+  DERIVED: [PRIMARY_CAPTURED, PRIMARY_LOCATED, SECONDARY]
+  ESTIMATED: [PRIMARY_CAPTURED, PRIMARY_LOCATED, SECONDARY]
+  HYPOTHESIS: [SECONDARY, RECONSTRUCTED, ABSENT]
+  DECLARED_ONLY: [PRIMARY_LOCATED, SECONDARY]
+  NOT_PROVEN: [PRIMARY_LOCATED, SECONDARY, RECONSTRUCTED, ABSENT]
+
+intake_v1:
+  required: [protocol, ticker, as_of]
+  optional: [sources]

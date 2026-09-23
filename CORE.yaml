@@ -1,0 +1,20 @@
+schema_id: cosm.bot.core
+schema_version: "1.0.0"
+status: FROZEN_V1_FUNCTIONS
+contract: cosm.bot.contract/1.0.0
+matrix_closed: false
+note: >
+  V1 functions and profile format are frozen.
+  Extra layers and detectors stay open for V2.
+
+v1_functions: [init, validate, render]
+analysis_layers: see CONTRACT_V1.yaml
+deferred:
+  - FIF letter-grade
+  - ECI numeric score
+  - GitHub layer metrics runtime
+  - MONITORING scanner
+  - H-001
+  - SIGNAL_A
+  - Analysis Plane bodies
+  - CAS

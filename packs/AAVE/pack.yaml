@@ -1,0 +1,27 @@
+protocol: Aave
+ticker: AAVE
+profile_id: BOT-AAVE-001
+profile_rev: r1
+as_of: "2026-09-23"
+v2_candidates:
+  - live governance proposal graph
+  - treasury / collector signer set
+  - GHO minter path as revenue-to-token
+  - V4 vs V3 running-system identity
+summaries:
+  weaknesses:
+    finding_id: AAVE-F-130
+    claim: "Official docs declare token-holder governance and upgradeable core contracts. This run did not capture guardian-key holders or a date-aligned treasury snapshot."
+    source_finding_ids: [AAVE-F-050, AAVE-F-001]
+    source_ids: [S-GOV, S-OVERVIEW]
+    locator_source: S-GOV
+    evidence_status: PRIMARY_LOCATED
+    falsifier: "Capture of signer registry and treasury snapshot with hashes."
+  strengths:
+    finding_id: AAVE-F-140
+    claim: "Official docs index, markdown mirrors, public GitHub audit directory reference, and on-chain voting architecture are published and were retrieved."
+    source_finding_ids: [AAVE-F-100, AAVE-F-010, AAVE-F-050]
+    source_ids: [S-LLMS, S-GOV]
+    locator_source: S-LLMS
+    evidence_status: PRIMARY_CAPTURED
+    falsifier: "llms.txt or governance page cannot be reproduced from saved bodies."

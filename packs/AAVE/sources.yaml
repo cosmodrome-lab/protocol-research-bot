@@ -1,0 +1,13 @@
+sources:
+  - {source_id: S-LLMS, url: "https://aave.com/docs/llms.txt", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-OVERVIEW, url: "https://aave.com/docs/aave-v3/overview.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-GOV, url: "https://aave.com/docs/ecosystem/governance.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-TOKEN, url: "https://aave.com/docs/ecosystem/aave.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-ORACLE, url: "https://aave.com/docs/ecosystem/oracle.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-ORACLE-SC, url: "https://aave.com/docs/aave-v3/smart-contracts/oracles.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-LICENSE, url: "https://aave.com/docs/resources/code-licensing.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-POOL, url: "https://aave.com/docs/developers/smart-contracts/pool.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-UMBRELLA, url: "https://aave.com/docs/aave-v3/umbrella.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-GHO, url: "https://aave.com/docs/ecosystem/gho.md", source_type: PRIMARY_OFFICIAL, publisher: Aave Docs, method: GET}
+  - {source_id: S-SECURITY, url: "https://aave.com/security", source_type: PRIMARY_OFFICIAL, publisher: Aave, method: GET}
+  - {source_id: S-GH-AUDITS, url: "https://api.github.com/repos/aave/aave-v3-core/contents/audits", source_type: PRIMARY_OFFICIAL, publisher: GitHub aave/aave-v3-core, method: GET}

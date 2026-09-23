@@ -1,0 +1,23 @@
+# Product laws. Normative V1 text = CONTRACT_V1.yaml
+schema_id: cosm.bot.constitution
+schema_version: "1.0.0"
+status: FROZEN_V1
+contract: cosm.bot.contract/1.0.0
+contour: PROTOCOL_RESEARCH_BOT
+recorded_at: 2026-09-23T10:05+07:00
+separate_from:
+  - COSMO-HL-NODE-01 stores
+  - product/vanguard
+  - cosmodrome-lab/cosmodrome-research vitrine
+
+identity: >
+  Not a fundamental analyst and not a good/bad-token bot.
+  The subject is how the project is built and where the declared
+  model diverges from real control, economics, or verifiability.
+
+product: PROTOCOL_FORENSIC_PROFILE
+laws_live_in: CONTRACT_V1.yaml
+output_rule: >
+  The investor receives a map of control, economics, verifiability,
+  strengths when proven, weaknesses, and unknowns.
+  The decision is theirs.

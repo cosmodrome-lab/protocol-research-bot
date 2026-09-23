@@ -1,0 +1,144 @@
+# PROTOCOL FORENSIC PROFILE V1 — frozen contract
+schema_id: cosm.bot.contract
+schema_version: "1.0.0"
+status: FROZEN
+frozen_at: "2026-09-23T10:05+07:00"
+unfreeze: OPERATOR_EXPLICIT_ONLY
+replaces: [constitution 0.1.0 draft, core 0.1.0 open, schema 0.1.0, engine r1]
+language_surface: EN
+semantics_unchanged: true
+
+product: PROTOCOL_FORENSIC_PROFILE
+product_is_not:
+  - investment_recommendation
+  - token_rating
+  - court_ready_forensic_revision
+  - smart_contract_audit
+  - letter_grade
+
+functions_mandatory:
+  init:
+    input: intake_v1
+    output: skeleton profile with unknown_slot per uncovered analysis layer
+  validate:
+    input: profile yaml
+    output: VALID | INVALID with violations
+  render:
+    input: valid profile
+    output: markdown map without recommendation language
+
+functions_forbidden:
+  - recommend
+  - score_letter
+  - close_unknown_without_evidence
+  - mount_forensic_stores
+  - treat_medium_cosmodrome_as_primary
+  - treat_absence_of_data_as_absence_of_risk
+
+intake_v1:
+  required: [protocol, ticker, as_of]
+  optional: [sources]
+  source_item: {locator: string, kind: enum[protocol_docs, chain, repo, filing, audit, official_comms, media, other]}
+  rule: "init does not analyse. init only opens the skeleton and copies sources into the profile."
+
+profile_required_top:
+  - profile_id          # BOT-{PROTOCOL_SHORT}-{SEQ:03d}
+  - protocol
+  - ticker
+  - profile_rev         # rN
+  - as_of               # YYYY-MM-DD
+  - contract            # cosm.bot.contract/1.0.0
+  - layers
+  - unknowns
+  - forbidden_outputs   # must include BUY and SELL
+
+analysis_layers_mandatory:
+  - smart_contracts
+  - audits
+  - tokenomics
+  - revenue_to_token
+  - validators_sequencers_nodes_oracles
+  - governance
+  - founders_management_entities
+  - jurisdiction_legal
+  - treasury_custody_bridges_keys
+  - market_structure
+  - disclosure_quality
+  - architectural_dependencies
+  - declared_vs_observed
+
+summary_layers_optional:
+  weaknesses:
+    epistemology_allowed: [DERIVED]
+    must_cite: source_finding_ids
+  strengths:
+    epistemology_allowed: [OBSERVED, DERIVED]
+    must_cite: source_finding_ids
+
+unknowns:
+  home: top_level_only
+  not_a_finding_epistemology: true
+  not_a_layer_of_findings: true
+  required_fields: [unknown_id, layer, question, why_material, what_would_close_it]
+  coverage_rule: >
+    Every analysis layer has >=1 finding or is pointed to by >=1 unknown_slot.
+    An empty layer with no UNKNOWN is a contract violation.
+  completeness_rule: >
+    A non-empty unknowns list is not a defect.
+    Closing UNKNOWN is not a V1 PASS criterion.
+
+finding:
+  required: [finding_id, layer, claim, epistemology, evidence_status, locator, falsifier]
+  epistemology_allowed: [OBSERVED, DERIVED, ESTIMATED, HYPOTHESIS, DECLARED_ONLY, NOT_PROVEN]
+  epistemology_forbidden_on_finding: [UNKNOWN]
+  evidence_status_allowed: [PRIMARY_CAPTURED, PRIMARY_LOCATED, SECONDARY, RECONSTRUCTED, ABSENT]
+  locator_rule: >
+    locator is required unless evidence_status=ABSENT
+    (then locator may be empty).
+  primary_captured_rule: PRIMARY_CAPTURED requires artifact_hash
+  self_speech_rule: >
+    A COSMODROME article / Medium @Cosmodrome-eng. / this Bot
+    has kind=media and evidence_status no higher than SECONDARY.
+    It cannot carry OBSERVED.
+
+compatibility:
+  OBSERVED:     [PRIMARY_CAPTURED, PRIMARY_LOCATED]
+  DERIVED:      [PRIMARY_CAPTURED, PRIMARY_LOCATED, SECONDARY]
+  ESTIMATED:    [PRIMARY_CAPTURED, PRIMARY_LOCATED, SECONDARY]
+  HYPOTHESIS:   [SECONDARY, RECONSTRUCTED, ABSENT]
+  DECLARED_ONLY:[PRIMARY_LOCATED, SECONDARY]
+  NOT_PROVEN:   [PRIMARY_LOCATED, SECONDARY, RECONSTRUCTED, ABSENT]
+
+derived_rule: >
+  DERIVED + SECONDARY is allowed only if the finding cites
+  source_finding_ids inside this profile or states the
+  DECLARED/OBSERVED premises. Otherwise use HYPOTHESIS or NOT_PROVEN.
+
+render_must_include:
+  - as_of
+  - all analysis layers present in file
+  - unknowns
+  - banner_not_recommendation
+render_must_not_include:
+  - BUY/SELL/HOLD as advice
+  - letter_grade
+  - price_target
+
+banned_claim_language:
+  - buy
+  - sell
+  - accumulate
+  - allocate
+  - price target
+  - undervalued
+  - overvalued
+
+not_in_v1:
+  - FIF composite grade
+  - ECI numeric score
+  - GCM GCDS POCI GMI computation
+  - live collectors
+  - CAS / object store
+  - court_ready
+  - Vanguard CASE_ID
+  - GitHub push as part of this contract
